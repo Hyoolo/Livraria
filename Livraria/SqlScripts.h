@@ -1,6 +1,5 @@
 #pragma once
 
-
 // USUARIOS //
 
 // Create
@@ -31,7 +30,6 @@ const char* produtoInsert[6];
 
 const char* listarProduto = "SELECT codigo, descricao, precoCusto, precoVenda, estoqueMin, estoqueMax FROM  produtos;";
 
-
 // Update
 const char* editarProduto = "UPDATE produtos SET $2=$3 ";
 
@@ -48,5 +46,3 @@ const char* listarEstoque = "SELECT * FROM estoque;";
 // Update
 
 // Delete
-
-

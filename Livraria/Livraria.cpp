@@ -11,7 +11,6 @@ int main(int argc, char** argv)
 	{
 		std::cout << func.getUser(func, i) << std::endl;
 	}
-	
+
 	return 0;
 }
-

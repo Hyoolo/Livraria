@@ -30,7 +30,7 @@ namespace Usuarios
 
 		void setSenha(std::string Senha) { this->Senha = Senha; }
 		std::string getSenha() { return this->Senha; }
-		
+
 		int getId(void) { }
 
 		void novoUsuario(Usuario user)
@@ -46,11 +46,10 @@ namespace Usuarios
 			PGresult* res = PQexecParams(conn.getConexao(), "INSERT INTO funcionarios (nome, login, senha) values($1, $2, $3);", 3, NULL, ParamsValues, NULL, NULL, 0);
 
 			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-		
 				printf("No data sent\n");
 				PQclear(res);
 			}
-			else 
+			else
 			{
 				std::cout << "Usuario Cadastrado\n";
 			}
@@ -63,12 +62,11 @@ namespace Usuarios
 			char* buffer = (char*)malloc(200);
 
 			conexao conn;
-			PGresult *res = PQexec(conn.getConexao(), "SELECT nome, login FROM funcionarios;");
+			PGresult* res = PQexec(conn.getConexao(), "SELECT nome, login FROM funcionarios;");
 
 			user.Nome = PQgetvalue(res, row, 0);
 
 			return user.Nome;
-
 		}
 
 		int getRows()
@@ -83,6 +81,5 @@ namespace Usuarios
 
 			return rows;
 		}
-
 	};
 }
