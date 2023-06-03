@@ -23,7 +23,6 @@ namespace Usuarios
 		// GETTERS e SETTERS para a classe Usuarios
 
 		void setNome(std::string Nome) { this->Nome = Nome; }
-
 		std::string getNome() { return this->Nome; }
 
 		void setLogin(std::string Login) { this->Login = Login; }
