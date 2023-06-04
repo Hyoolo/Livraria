@@ -19,8 +19,8 @@ namespace Usuarios
 		std::string connInfo = "user=postgres dbname=livraria2 host=192.168.33.20 password=123456";
 
 	public:
-		// GETTERS e SETTERS para a classe Usuarios
 
+		// GETTERS e SETTERS para a classe Usuarios
 		void setNome(std::string Nome) { this->Nome = Nome; }
 		std::string getNome(void) { return this->Nome; }
 
