@@ -2,7 +2,6 @@
 
 #include <string>
 #include <iostream>
-
 #include "Conexao.h"
 
 using namespace Conexao;
@@ -23,23 +22,22 @@ namespace Usuarios
 		// GETTERS e SETTERS para a classe Usuarios
 
 		void setNome(std::string Nome) { this->Nome = Nome; }
-		std::string getNome() { return this->Nome; }
+		std::string getNome(void) { return this->Nome; }
 
 		void setLogin(std::string Login) { this->Login = Login; }
-		std::string getLogin() { return this->Login; }
+		std::string getLogin(void) { return this->Login; }
 
 		void setSenha(std::string Senha) { this->Senha = Senha; }
-		std::string getSenha() { return this->Senha; }
+		std::string getSenha(void) { return this->Senha; }
 
-		int getId(void) { }
-
+		// CREATE
 		void novoUsuario(Usuario user)
 		{
 			const char* ParamsValues[3];
 
-			ParamsValues[0] = user.getNome().data();
-			ParamsValues[1] = user.getLogin().data();
-			ParamsValues[2] = user.getSenha().data();
+			ParamsValues[0] = this->Nome.data();
+			ParamsValues[1] = this->Login.data();
+			ParamsValues[2] = this->Senha.data();
 
 			conexao conn;
 
@@ -49,14 +47,11 @@ namespace Usuarios
 				printf("No data sent\n");
 				PQclear(res);
 			}
-			else
-			{
-				std::cout << "Usuario Cadastrado\n";
-			}
 
 			PQclear(res);
 		}
 
+		// READ
 		std::string getUser(Usuario user, int row)
 		{
 			char* buffer = (char*)malloc(200);
@@ -69,7 +64,45 @@ namespace Usuarios
 			return user.Nome;
 		}
 
-		int getRows()
+		// DELETE
+		void deletarUsuario(char* id)
+		{
+			const char* str[] = { id };
+			conexao conn;
+			PGresult* res = PQexecParams(conn.getConexao(), "DELETE FROM funcionarios WHERE id=$1;", 1, NULL, str, NULL, NULL, 0);
+
+			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+				printf("No data sent\n");
+				PQclear(res);
+			}
+
+			PQclear(res);
+		}
+
+		// UPDATE
+		void atualizarUsuario(std::string id, std::string Nome, std::string Login, std::string Senha)
+		{
+			conexao conn;
+
+			const char* ParamsValues[4];
+
+			ParamsValues[0] = id.data();
+			ParamsValues[1] = Nome.data();
+			ParamsValues[2] = Login.data();
+			ParamsValues[3] = Senha.data();
+
+			PGresult* res = PQexecParams(conn.getConexao(),"UPDATE funcionarios SET nome=$2, login=$3, senha=$4 WHERE id=$1;", 4, NULL, ParamsValues, NULL, NULL, 0);
+			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+				printf("No data sent\n");
+				PQclear(res);
+			}
+
+			PQclear(res);
+		}
+
+		int getId(void) { }
+
+		int getRows(void)
 		{
 			conexao conn;
 

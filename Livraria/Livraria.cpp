@@ -12,5 +12,10 @@ int main(int argc, char** argv)
 		std::cout << func.getUser(func, i) << std::endl;
 	}
 
+	char* id = (char*) malloc(1);
+	//std::cin >> id;
+
+	//func.deletarUsuario(id);
+
 	return 0;
 }
