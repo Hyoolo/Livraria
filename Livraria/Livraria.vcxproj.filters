@@ -20,12 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="User.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SqlScripts.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Usuarios.h">
       <Filter>Header Files</Filter>
     </ClInclude>
