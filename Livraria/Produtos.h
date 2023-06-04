@@ -6,7 +6,7 @@
 
 using namespace Conexao;
 
-namespace Produtos 
+namespace Produtos
 {
 	class Produto
 	{
@@ -30,8 +30,10 @@ namespace Produtos
 			this->precoMax = precoMax;
 		}
 
+		// CREATE
 		void novoProduto(Produto prod)
 		{
+			const char* sql = "INSERT INTO produtos (codigo, descricao, precoCusto, precoVenda, estoqueMin, estoqueMax) values($1, $2, $3, $4, $5, $6);";
 			const char* ParamsValues[6];
 
 			ParamsValues[0] = this->codigo.data();
@@ -43,7 +45,7 @@ namespace Produtos
 
 			conexao conn;
 
-			PGresult* res = PQexecParams(conn.getConexao(), "INSERT INTO produtos (codigo, descricao, precoCusto, precoVenda, estoqueMin, estoqueMax) values($1, $2, $3, $4, $5, $6);", 6, NULL, ParamsValues, NULL, NULL, 0);
+			PGresult* res = PQexecParams(conn.getConexao(), sql, 6, NULL, ParamsValues, NULL, NULL, 0);
 
 			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 				printf("No data sent\n");
@@ -51,5 +53,27 @@ namespace Produtos
 			}
 			PQclear(res);
 		}
+		
+		// READ
+
+		// UPDATE
+
+		// DELETE
+
+		// NUMERO DE ROWS
+		int getRows(void)
+		{
+			conexao conn;
+
+			PGresult* res = PQexec(conn.getConexao(), "SELECT id FROM produtos;");
+			int rows = PQntuples(res);
+
+			PQclear(res);
+			PQfinish(conn.getConexao());
+
+			return rows;
+		}
+
+		// ID
 	};
 }
