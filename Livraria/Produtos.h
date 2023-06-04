@@ -55,6 +55,13 @@ namespace Produtos
 		}
 		
 		// READ
+		std::string listaCodigo(int row);
+		std::string listaDescricao(int row);
+		std::string listaPrecoCusto(int row);
+		std::string listaPrecoVenda(int row);
+		std::string listaPrecoMin(int row);
+		std::string listaPrecoMax(int row);
+
 
 		// UPDATE
 

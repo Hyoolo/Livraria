@@ -20,12 +20,36 @@ namespace Usuarios
 
 	public:
 
-		// METODO CONSTRUTOR
-		Usuario(std::string Nome, std::string Login, std::string Senha)
+		// GETTERS E SETTER
+
+		void setNome(std::string Nome)
 		{
 			this->Nome = Nome;
+		}
+
+		std::string getNome(void)
+		{
+			return this->Nome;
+		}
+
+		void setLogin(std::string Login)
+		{
 			this->Login = Login;
+		}
+
+		std::string getLogin(void)
+		{
+			return this->Login;
+		}
+
+		void setSenha(std::string Senha)
+		{
 			this->Senha = Senha;
+		}
+
+		std::string getSenha(void)
+		{
+			return this->Senha;
 		}
 
 		// CREATE
@@ -51,17 +75,9 @@ namespace Usuarios
 		}
 
 		// READ
-		std::string getUser(Usuario user, int row)
-		{
-			char* buffer = (char*)malloc(200);
-
-			conexao conn;
-			PGresult* res = PQexec(conn.getConexao(), "SELECT nome, login FROM funcionarios;");
-
-			user.Nome = PQgetvalue(res, row, 0);
-
-			return user.Nome;
-		}
+		std::string listaNome(int row);
+		std::string listaLogin(int row);
+		std::string listaSenha(int row);
 
 		// DELETE
 		void deletarUsuario(char* id)

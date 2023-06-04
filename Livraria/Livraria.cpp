@@ -5,14 +5,15 @@ using namespace Usuarios;
 
 int main(int argc, char** argv)
 {
-	Usuario func;
+	Usuario func = func.listaUsuario();
 
-	for (int i = 0; i < func.getRows(); i++)
+	for (int i = 0; i < 1; i++)
 	{
-		std::cout << func.getUser(func, i) << std::endl;
+		Usuario func = func.listaUsuario(i);
+		std::cout << func;
 	}
 
-	char* id = (char*)malloc(1);
+	//char* id = (char*)malloc(1);
 	//std::cin >> id;
 
 	//func.deletarUsuario(id);
