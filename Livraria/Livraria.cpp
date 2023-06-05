@@ -5,12 +5,13 @@ using namespace Usuarios;
 
 int main(int argc, char** argv)
 {
-	Usuario func = func.listaUsuario();
+	Usuario func;
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < func.getRows(); i++)
 	{
-		Usuario func = func.listaUsuario(i);
-		std::cout << func;
+	    func.listaUsuario(&func, i);
+		std::cout << func.getNome() << "\t";
+		std::cout << func.getLogin() << std::endl;
 	}
 
 	//char* id = (char*)malloc(1);

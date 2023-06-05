@@ -75,9 +75,22 @@ namespace Usuarios
 		}
 
 		// READ
-		std::string listaNome(int row);
-		std::string listaLogin(int row);
-		std::string listaSenha(int row);
+
+		void listaUsuario(Usuario* user, int row)
+		{
+			const char* sql = "SELECT nome, login FROM funcionarios;";
+			conexao conn;
+			PGresult* res = PQexec(conn.getConexao(), sql);
+
+			if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+				printf("No data sent\n");
+				PQclear(res);
+			}
+
+			user->setNome(PQgetvalue(res, row, 0));
+			user->setLogin(PQgetvalue(res, row, 1));
+			PQclear(res);
+		}
 
 		// DELETE
 		void deletarUsuario(char* id)
