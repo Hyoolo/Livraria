@@ -11,6 +11,7 @@ namespace Produtos
 	class Produto
 	{
 	private:
+		int id;
 		std::string codigo;
 		std::string descricao;
 		std::string precoCusto;
@@ -20,6 +21,16 @@ namespace Produtos
 	public:
 
 		// GETTERS E SETTERS
+		void setId(int id)
+		{
+			this->id = id;
+		}
+
+		int getId(void)
+		{
+			return this->id;
+		}
+
 		void setCodigo(std::string codigo)
 		{
 			this->codigo = codigo;
@@ -103,10 +114,9 @@ namespace Produtos
 			}
 			PQclear(res);
 		}
-		
-		// READ
 
-		void listaProduto(Produto *prod, int rows)
+		// READ
+		void listaProduto(Produto* prod, int rows)
 		{
 			const char* sql = "SELECT codigo, descricao, precoCusto, precoVenda, estoqueMin, estoqueMax FROM produtos;";
 			conexao conn;
@@ -127,9 +137,11 @@ namespace Produtos
 			PQclear(res);
 		}
 
-		// UPDATE
+		// UPDATE TODO: REFAZER
+		void atualizarProduto();
 
-		// DELETE
+		// DELETE TODO: REFAZER
+		void deletarProduto();
 
 		// NUMERO DE ROWS
 		int getRows(void)
@@ -144,8 +156,5 @@ namespace Produtos
 
 			return rows;
 		}
-
-		// ID
-		int idProduto(void);
 	};
 }

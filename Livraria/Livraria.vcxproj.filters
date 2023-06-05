@@ -29,6 +29,9 @@
     <ClInclude Include="Produtos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Estoque.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\libpqxx\7.7.5_x64\libpqxx_ALL.props" />

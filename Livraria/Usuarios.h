@@ -11,7 +11,7 @@ namespace Usuarios
 	class Usuario
 	{
 	private:
-		int Id;
+		std::string id;
 		std::string Nome;
 		std::string Login;
 		std::string Senha;
@@ -21,6 +21,15 @@ namespace Usuarios
 	public:
 
 		// GETTERS E SETTER
+		void setId(std::string id)
+		{
+			this->id = id;
+		}
+
+		std::string getId(void)
+		{
+			return this->id;
+		}
 
 		void setNome(std::string Nome)
 		{
@@ -75,10 +84,9 @@ namespace Usuarios
 		}
 
 		// READ
-
 		void listaUsuario(Usuario* user, int row)
 		{
-			const char* sql = "SELECT nome, login FROM funcionarios;";
+			const char* sql = "SELECT * FROM funcionarios;";
 			conexao conn;
 			PGresult* res = PQexec(conn.getConexao(), sql);
 
@@ -87,27 +95,14 @@ namespace Usuarios
 				PQclear(res);
 			}
 
-			user->setNome(PQgetvalue(res, row, 0));
-			user->setLogin(PQgetvalue(res, row, 1));
+			user->setId(PQgetvalue(res, row, 0));
+			user->setNome(PQgetvalue(res, row, 1));
+			user->setLogin(PQgetvalue(res, row, 2));
+			user->setSenha(PQgetvalue(res, row, 3));
 			PQclear(res);
 		}
 
-		// DELETE
-		void deletarUsuario(char* id)
-		{
-			const char* str[1] = { id };
-			conexao conn;
-			PGresult* res = PQexecParams(conn.getConexao(), "DELETE FROM funcionarios WHERE id=$1;", 1, NULL, str, NULL, NULL, 0);
-
-			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-				printf("No data sent\n");
-				PQclear(res);
-			}
-
-			PQclear(res);
-		}
-
-		// UPDATE
+		// UPDATE TODO: REFAZER
 		void atualizarUsuario(std::string id, std::string Nome, std::string Login, std::string Senha)
 		{
 			const char* sql = "UPDATE funcionarios SET nome=$2, login=$3, senha=$4 WHERE id=$1;";
@@ -117,9 +112,28 @@ namespace Usuarios
 			ParamsValues[1] = Nome.data();
 			ParamsValues[2] = Login.data();
 			ParamsValues[3] = Senha.data();
-			
+
 			conexao conn;
 			PGresult* res = PQexecParams(conn.getConexao(), sql, 4, NULL, ParamsValues, NULL, NULL, 0);
+			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+				printf("No data sent\n");
+				PQclear(res);
+			}
+
+			PQclear(res);
+		}
+
+		// DELETE TODO: REFAZER
+		void deletarUsuario(Usuario* user)
+		{
+			const char* sql = "DELETE FROM funcionarios WHERE id=$1;";
+			const char* ParamsValues[1];
+
+			ParamsValues[0] = user->getId().data();
+
+			conexao conn;
+			PGresult* res = PQexecParams(conn.getConexao(), sql, 1, NULL, ParamsValues, NULL, NULL, 0);
+
 			if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 				printf("No data sent\n");
 				PQclear(res);
@@ -131,9 +145,9 @@ namespace Usuarios
 		// NUMERO DE ROWS
 		int getRows(void)
 		{
+			const char* sql = "SELECT id FROM funcionarios;";
 			conexao conn;
-
-			PGresult* res = PQexec(conn.getConexao(), "SELECT id FROM funcionarios;");
+			PGresult* res = PQexec(conn.getConexao(), sql);
 			int rows = PQntuples(res);
 
 			PQclear(res);
@@ -141,8 +155,5 @@ namespace Usuarios
 
 			return rows;
 		}
-
-		// ID
-		int idUsuarios(void) { }
 	};
 }

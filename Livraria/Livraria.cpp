@@ -9,15 +9,9 @@ int main(int argc, char** argv)
 
 	for (int i = 0; i < func.getRows(); i++)
 	{
-	    func.listaUsuario(&func, i);
-		std::cout << func.getNome() << "\t";
-		std::cout << func.getLogin() << std::endl;
+		func.listaUsuario(&func, i);
+		std::cout << func.getId() << " " << func.getNome() << " " << func.getLogin() << " " << func.getSenha() << std::endl;
 	}
-
-	//char* id = (char*)malloc(1);
-	//std::cin >> id;
-
-	//func.deletarUsuario(id);
 
 	return 0;
 }

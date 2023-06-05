@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Conexao.h" />
+    <ClInclude Include="Estoque.h" />
     <ClInclude Include="Produtos.h" />
     <ClInclude Include="Usuarios.h" />
   </ItemGroup>
