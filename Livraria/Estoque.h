@@ -14,6 +14,7 @@ namespace Estoques
 	{
 	private:
 		std::string id;
+		std::string produtoId;
 		std::string dataEntrada;
 		std::string quantidade;
 	
@@ -51,12 +52,16 @@ namespace Estoques
 			return this->quantidade;
 		}
 
-		// CREATE 
+		// CREATE
+		void novoEstoque();
 
 		// READ
+		void listarEstoque();
 
 		// UPDATE
+		void atualizarEstoque();
 
 		// DELETE
+		void deletarEstoque();
 	};
 }

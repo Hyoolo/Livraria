@@ -11,6 +11,7 @@ namespace Produtos
 	class Produto
 	{
 	private:
+
 		int id;
 		std::string codigo;
 		std::string descricao;
@@ -18,6 +19,7 @@ namespace Produtos
 		std::string precoVenda;
 		std::string estoqueMin;
 		std::string estoqueMax;
+
 	public:
 
 		// GETTERS E SETTERS

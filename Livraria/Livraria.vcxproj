@@ -142,6 +142,7 @@
     <ClInclude Include="Estoque.h" />
     <ClInclude Include="Produtos.h" />
     <ClInclude Include="Usuarios.h" />
+    <ClInclude Include="Venda.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\..\..\libpqxx\7.7.5_x64\libpqxx_ALL.props" />

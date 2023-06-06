@@ -6,17 +6,16 @@
 
 using namespace Conexao;
 
-namespace Usuarios
+namespace Funcionarios
 {
-	class Usuario
+	class Funcionario
 	{
 	private:
+
 		std::string id;
 		std::string Nome;
 		std::string Login;
 		std::string Senha;
-
-		std::string connInfo = "user=postgres dbname=livraria2 host=192.168.33.20 password=123456";
 
 	public:
 
@@ -25,7 +24,6 @@ namespace Usuarios
 		{
 			this->id = id;
 		}
-
 		std::string getId(void)
 		{
 			return this->id;
@@ -35,7 +33,6 @@ namespace Usuarios
 		{
 			this->Nome = Nome;
 		}
-
 		std::string getNome(void)
 		{
 			return this->Nome;
@@ -45,7 +42,6 @@ namespace Usuarios
 		{
 			this->Login = Login;
 		}
-
 		std::string getLogin(void)
 		{
 			return this->Login;
@@ -55,14 +51,13 @@ namespace Usuarios
 		{
 			this->Senha = Senha;
 		}
-
 		std::string getSenha(void)
 		{
 			return this->Senha;
 		}
 
 		// CREATE
-		void novoUsuario(Usuario user)
+		void novoFuncinario(void)
 		{
 			const char* sql = "INSERT INTO funcionarios (nome, login, senha) values($1, $2, $3);";
 			const char* ParamsValues[3];
@@ -84,7 +79,7 @@ namespace Usuarios
 		}
 
 		// READ
-		void listaUsuario(Usuario* user, int row)
+		void listaFuncionario(Funcionario* user, int row)
 		{
 			const char* sql = "SELECT * FROM funcionarios;";
 			conexao conn;
@@ -103,7 +98,7 @@ namespace Usuarios
 		}
 
 		// UPDATE TODO: REFAZER
-		void atualizarUsuario(std::string id, std::string Nome, std::string Login, std::string Senha)
+		void atzarFuncionario(std::string id, std::string Nome, std::string Login, std::string Senha)
 		{
 			const char* sql = "UPDATE funcionarios SET nome=$2, login=$3, senha=$4 WHERE id=$1;";
 			const char* ParamsValues[4];
@@ -124,7 +119,7 @@ namespace Usuarios
 		}
 
 		// DELETE TODO: REFAZER
-		void deletarUsuario(Usuario* user)
+		void deletarFuncionario(Funcionario* user)
 		{
 			const char* sql = "DELETE FROM funcionarios WHERE id=$1;";
 			const char* ParamsValues[1];
