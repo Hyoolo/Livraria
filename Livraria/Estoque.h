@@ -6,62 +6,40 @@
 #include "Produtos.h"
 
 using namespace Conexao;
-using namespace Produtos;
 
-namespace Estoques
+class Estoque
 {
-	class Estoque
+private:
+
+	std::string id;
+	std::string produtoId;
+	std::string dataEntrada;
+	std::string quantidade;
+
+public:
+
+	// GETTERS E SETTERS
+
+	void setId(std::string id) { this->id = id; }
+	void setDataEntrada(std::string dataEntrada) { this->dataEntrada = dataEntrada; }
+	void setQuantidade(std::string quantidade) { this->quantidade = quantidade; }
+
+	std::string getDataEntrada(void) { return this->dataEntrada; }
+	std::string getId(void) { return this->id; }
+	std::string getQuantidade(void) { return this->quantidade; }
+
+	// CREATE
+	void novoEstoque()
 	{
-	private:
-		std::string id;
-		std::string produtoId;
-		std::string dataEntrada;
-		std::string quantidade;
-	
-	public:
 
-		// GETTERS E SETTERS
+	}
 
-		void setId(std::string id)
-		{
-			this->id = id;
-		}
+	// READ
+	void listarEstoque();
 
-		std::string getId(void)
-		{
-			return this->id;
-		}
+	// UPDATE
+	void atualizarEstoque();
 
-		void setDataEntrada(std::string dataEntrada)
-		{
-			this->dataEntrada = dataEntrada;
-		}
-
-		std::string getDataEntrada(void)
-		{
-			return this->dataEntrada;
-		}
-
-		void setQuantidade(std::string quantidade)
-		{
-			this->quantidade = quantidade;
-		}
-
-		std::string getQuantidade(void)
-		{
-			return this->quantidade;
-		}
-
-		// CREATE
-		void novoEstoque();
-
-		// READ
-		void listarEstoque();
-
-		// UPDATE
-		void atualizarEstoque();
-
-		// DELETE
-		void deletarEstoque();
-	};
-}
+	// DELETE
+	void deletarEstoque();
+};

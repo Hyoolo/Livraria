@@ -14,8 +14,6 @@ namespace Conexao
 
 	public:
 
-		conexao() {}
-
 		PGconn* getConexao(void)
 		{
 			PGconn* conn = PQconnectdb(connInfo);

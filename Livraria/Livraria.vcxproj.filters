@@ -20,7 +20,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Usuarios.h">
+    <ClInclude Include="Funcionarios.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Conexao.h">
@@ -32,11 +32,14 @@
     <ClInclude Include="Estoque.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Venda.h">
+    <ClInclude Include="Vendas.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\..\..\..\..\..\libpqxx\7.7.5_x64\libpqxx_ALL.props" />
+    <ClInclude Include="Itens_venda.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Livraria.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

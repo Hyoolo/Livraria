@@ -7,31 +7,29 @@
 
 using namespace Conexao;
 
-namespace Vendas
+class Venda
 {
-	class Venda
-	{
-	private:
-		std::string id;
-		std::string dataVenda;
-		std::string funcionarioId;
-		std::string valorTotal;
+private:
 
-	public:
+	std::string id;
+	std::string dataVenda;
+	std::string funcionarioId;
+	std::string valorTotal;
 
-		void setId(std::string id);
-		std::string getId(void);
+public:
 
-		void setDataVenda(std::string dataVenda);
-		std::string getDataVenda(void);
+	void setId(std::string id);
+	std::string getId(void);
 
-		void setValorTotal(std::string valorTotal);
-		std::string getValorTotal(void);
+	void setDataVenda(std::string dataVenda);
+	std::string getDataVenda(void);
 
-		void novaVenda(void);
+	void setValorTotal(std::string valorTotal);
+	std::string getValorTotal(void);
 
-		void deletarVenda(Venda* venda);
+	void novaVenda(void);
 
-		void listarVenda(Venda* venda, int row);
-	};
-}
+	void deletarVenda(Venda* venda);
+
+	void listarVenda(Venda* venda, int row);
+};
