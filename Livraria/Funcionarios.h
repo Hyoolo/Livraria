@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Conexao.h"
 
-using namespace Conexao;
+using namespace conexao;
 
 class Funcionario
 {
@@ -38,7 +38,7 @@ public:
 		ParamsValues[1] = this->Login.data();
 		ParamsValues[2] = this->Senha.data();
 
-		conexao conn;
+		Conexao conn;
 
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 3, NULL, ParamsValues, NULL, NULL, 0);
 
@@ -54,7 +54,7 @@ public:
 	void listaFuncionario(Funcionario* user, int row)
 	{
 		const char* sql = "SELECT * FROM funcionarios;";
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexec(conn.getConexao(), sql);
 
 		if (PQresultStatus(res) != PGRES_TUPLES_OK) {
@@ -80,7 +80,7 @@ public:
 		ParamsValues[2] = Login.data();
 		ParamsValues[3] = Senha.data();
 
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 4, NULL, ParamsValues, NULL, NULL, 0);
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 			printf("No data sent\n");
@@ -98,7 +98,7 @@ public:
 
 		ParamsValues[0] = user->getId().data();
 
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 1, NULL, ParamsValues, NULL, NULL, 0);
 
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -113,7 +113,7 @@ public:
 	int getRows(void)
 	{
 		const char* sql = "SELECT id FROM funcionarios;";
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexec(conn.getConexao(), sql);
 		int rows = PQntuples(res);
 

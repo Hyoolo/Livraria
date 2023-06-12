@@ -5,7 +5,7 @@
 #include "Conexao.h"
 #include "Produtos.h"
 
-using namespace Conexao;
+using namespace conexao;
 
 class Estoque
 {

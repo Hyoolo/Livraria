@@ -4,9 +4,9 @@
 #include <string>
 #include <postgres/libpq-fe.h>
 
-namespace Conexao
+namespace conexao
 {
-	class conexao
+	class Conexao
 	{
 	private:
 

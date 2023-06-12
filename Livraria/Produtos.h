@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Conexao.h"
 
-using namespace Conexao;
+using namespace conexao;
 
 class Produto
 {
@@ -50,7 +50,7 @@ public:
 		ParamsValues[4] = this->getEstoqueMin().data();
 		ParamsValues[5] = this->getEstoqueMax().data();
 
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 6, NULL, ParamsValues, NULL, NULL, 0);
 
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -64,7 +64,7 @@ public:
 	void listaProduto(int rows)
 	{
 		const char* sql = "SELECT codigo, descricao, precoCusto, precoVenda, estoqueMin, estoqueMax FROM produtos;";
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexec(conn.getConexao(), sql);
 
 		if (PQresultStatus(res) != PGRES_TUPLES_OK) {
@@ -95,7 +95,7 @@ public:
 		ParamValues[4] = this->getEstoqueMin().data();
 		ParamValues[5] = this->getEstoqueMax().data();
 
-		conexao conn;
+		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 6, NULL, ParamValues, NULL, NULL, 0);
 
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -118,7 +118,7 @@ public:
 	// NUMERO DE ROWS
 	int getRows(void)
 	{
-		conexao conn;
+		Conexao conn;
 
 		PGresult* res = PQexec(conn.getConexao(), "SELECT id FROM produtos;");
 		int rows = PQntuples(res);

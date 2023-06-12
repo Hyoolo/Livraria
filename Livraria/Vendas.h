@@ -2,12 +2,13 @@
 
 #include <string>
 #include <iostream>
+#include "Funcionarios.h"
 #include "Conexao.h"
 #include "itens_venda.h"
 
-using namespace Conexao;
+using namespace conexao;
 
-class Venda
+class Venda : Funcionario
 {
 private:
 
@@ -18,18 +19,76 @@ private:
 
 public:
 
-	void setId(std::string id);
-	std::string getId(void);
+	void setId(std::string id) { this->id = id; }
+	void setDataVenda(std::string dataVenda) { this->dataVenda = dataVenda; }
+	void setFuncionarioId(std::string funcionarioId) { this->funcionarioId = funcionarioId; }
+	void setValorTotal(std::string valorTotal) { this->valorTotal = valorTotal; }
 
-	void setDataVenda(std::string dataVenda);
-	std::string getDataVenda(void);
+	std::string getId(void) { return this->id; }
+	std::string getDataVenda(void) { return this->dataVenda; }
+	std::string getFuncionarioId(void) { return this->funcionarioId; }
+	std::string getValorTotal(void) { return this->valorTotal; }
 
-	void setValorTotal(std::string valorTotal);
-	std::string getValorTotal(void);
+	// CREATE 
+	void novaVenda(void)
+	{
+		const char* sql = "INSERT INTO vendas (dataVenda, funcionarioId, valorTotal) values($1, $2, $3);";
+		const char* paramValues[3]{};
 
-	void novaVenda(void);
+		paramValues[0] = this->getDataVenda().data();
+		paramValues[1] = this->getFuncionarioId().data();
+		paramValues[2] = this->getValorTotal().data();
 
-	void deletarVenda(Venda* venda);
+		Conexao conn;
+		PGresult* res = PQexecParams(conn.getConexao(), sql, 3, NULL, paramValues, NULL, NULL, 0);
+		
+		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+			printf("Nenhum dado enviado!\n");
+			PQclear(res);
+		}
+		PQclear(res);
+	}
 
-	void listarVenda(Venda* venda, int row);
+	// READ
+	void listarVenda(int rows)
+	{
+		const char* sql = "SELECT * FROM vendas;";
+		Conexao conn;
+		PGresult* res = PQexec(conn.getConexao(), sql);
+
+		if (PQresultStatus(res) != PGRES_TUPLES_OK) {
+			printf("Nenhuma informação recebida!\n");
+			PQclear(res);
+		}
+
+		this->setId(PQgetvalue(res, rows, 0));
+		this->setDataVenda(PQgetvalue(res, rows, 1));
+		this->setFuncionarioId(PQgetvalue(res, rows, 2));
+		this->setValorTotal(PQgetvalue(res, rows, 3));
+	}
+
+	// UPDATE TODO: REFAZER
+	void atualizarVenda(void)
+	{
+
+	}
+
+	//DELETE TODO: REFAZER
+	void deletarVenda(void)
+	{
+
+	}
+
+	int getRows(void)
+	{
+		Conexao conn;
+
+		PGresult* res = PQexec(conn.getConexao(), "SELECT id FROM vendas;");
+		int rows = PQntuples(res);
+
+		PQclear(res);
+		PQfinish(conn.getConexao());
+
+		return rows;
+	}
 };
