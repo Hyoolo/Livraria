@@ -34,8 +34,8 @@ public:
 	std::string getQuantidade() { return this->quantidade; }
 	std::string getValorTotal() { return this->valorTotal; }
 
-	// CREATE 
-	void novoItem_venda()
+	// CREATE
+	void novoItem_venda(void)
 	{
 		const char* sql = "INSERT INTO itens_venda ()";
 		const char* ParamValues[6]{};
@@ -49,7 +49,7 @@ public:
 		}
 		PQclear(res);
 	}
-	
+
 	// READ
 	void listarItens_venda(int rows)
 	{
@@ -68,19 +68,54 @@ public:
 		this->setValorUnitario(PQgetvalue(res, rows, 3));
 		this->setQuantidade(PQgetvalue(res, rows, 4));
 		this->setValorTotal(PQgetvalue(res, rows, 5));
-		
+
 		PQclear(res);
 	}
 
 	// UPDATE
-	void atualizarItens_venda()
+	void atualizarItens_venda(void)
 	{
+		const char* sql = "UPDATE itens_venda SET ProdutoId = $2, valorUnitario = $3, quantidade = $4, valorTotal = $5 WHERE id = $1;";
+		const char* paramValues[4]{};
 
+		paramValues[0] = this->getProdutoId().data();
+		paramValues[1] = this->getValorUnitario().data();
+		paramValues[2] = this->getQuantidade().data();
+		paramValues[3] = this->getValorTotal().data();
+
+		Conexao conn;
+		PGresult* res = PQexecParams(conn.getConexao(), sql, 6, NULL, paramValues, NULL, NULL, 0);
+		
+		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
+			printf("Nenhum dado enviado!\n");
+			PQclear(res);
+		}
+		PQclear(res);
 	}
 
 	// DELETE
-	void deletarItens_venda()
+	void deletarItens_venda(void)
 	{
+		const char* sql = "DELETE FROM itens_venda WHERE id=$1;";
+		const char* ParamValues[1]{};
 
+		ParamValues[0] = this->getId().data();
+
+		Conexao conn;
+		PGresult* res = PQexec(conn.getConexao(), sql);
+
+	}
+
+	int getRows(void)
+	{
+		Conexao conn;
+
+		PGresult* res = PQexec(conn.getConexao(), "SELECT id FROM itens_venda;");
+		int rows = PQntuples(res);
+
+		PQclear(res);
+		PQfinish(conn.getConexao());
+
+		return rows;
 	}
 };

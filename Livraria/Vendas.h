@@ -29,7 +29,7 @@ public:
 	std::string getFuncionarioId(void) { return this->funcionarioId; }
 	std::string getValorTotal(void) { return this->valorTotal; }
 
-	// CREATE 
+	// CREATE
 	void novaVenda(void)
 	{
 		const char* sql = "INSERT INTO vendas (dataVenda, funcionarioId, valorTotal) values($1, $2, $3);";
@@ -41,7 +41,7 @@ public:
 
 		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 3, NULL, paramValues, NULL, NULL, 0);
-		
+
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 			printf("Nenhum dado enviado!\n");
 			PQclear(res);
@@ -70,13 +70,18 @@ public:
 	// UPDATE TODO: REFAZER
 	void atualizarVenda(void)
 	{
-
 	}
 
 	//DELETE TODO: REFAZER
 	void deletarVenda(void)
 	{
+		const char* sql = "DELETE FROM vendas WHERE id=$1;";
+		const char* paramValues[1]{};
 
+		Conexao conn;
+		PGresult* res = PQexec(conn.getConexao(), sql);
+
+		paramValues[0] = this->getId().data();
 	}
 
 	int getRows(void)

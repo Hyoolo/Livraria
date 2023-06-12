@@ -39,7 +39,6 @@ public:
 		ParamsValues[2] = this->Senha.data();
 
 		Conexao conn;
-
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 3, NULL, ParamsValues, NULL, NULL, 0);
 
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
@@ -82,6 +81,7 @@ public:
 
 		Conexao conn;
 		PGresult* res = PQexecParams(conn.getConexao(), sql, 4, NULL, ParamsValues, NULL, NULL, 0);
+		
 		if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 			printf("No data sent\n");
 			PQclear(res);

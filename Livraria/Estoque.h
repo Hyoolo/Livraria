@@ -31,7 +31,6 @@ public:
 	// CREATE
 	void novoEstoque()
 	{
-
 	}
 
 	// READ

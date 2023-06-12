@@ -103,7 +103,6 @@ public:
 			PQclear(res);
 		}
 		PQclear(res);
-		
 	}
 
 	// DELETE TODO: REFAZER
@@ -113,6 +112,10 @@ public:
 		const char* ParamValues[1]{};
 
 		ParamValues[0] = this->getId().data();
+
+		Conexao conn;
+		PGresult* res = PQexec(conn.getConexao(), sql);
+
 	}
 
 	// NUMERO DE ROWS
